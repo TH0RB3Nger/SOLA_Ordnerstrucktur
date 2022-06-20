@@ -1,4 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
+'Made By Thorben Renfordt
 Public Class Form1
     'TODO: Speichern und Laden Datumswerte unteschiedlich !!
     'Allgemeine Variablen (Daten)
