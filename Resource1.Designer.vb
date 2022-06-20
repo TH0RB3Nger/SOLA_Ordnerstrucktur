@@ -25,7 +25,7 @@ Namespace My.Resources
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
-    Friend Class LR_Preset
+    Friend Class Resource1
         
         Private Shared resourceMan As Global.System.Resources.ResourceManager
         
@@ -43,7 +43,7 @@ Namespace My.Resources
         Friend Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
             Get
                 If Object.ReferenceEquals(resourceMan, Nothing) Then
-                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("WindowsApp1.LR_Preset", GetType(LR_Preset).Assembly)
+                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("WindowsApp1.Resource1", GetType(Resource1).Assembly)
                     resourceMan = temp
                 End If
                 Return resourceMan
@@ -65,20 +65,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die %AppData%\Adobe\Lightroom\Develop Presets ähnelt.
-        '''</summary>
-        Friend Shared ReadOnly Property Pfad() As String
-            Get
-                Return ResourceManager.GetString("Pfad", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         '''</summary>
-        Friend Shared ReadOnly Property SOLA_21_draußen() As Byte()
+        Friend Shared ReadOnly Property draußen() As Byte()
             Get
-                Dim obj As Object = ResourceManager.GetObject("SOLA_21_draußen", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("draußen", resourceCulture)
                 Return CType(obj,Byte())
             End Get
         End Property
@@ -86,9 +77,39 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         '''</summary>
-        Friend Shared ReadOnly Property SOLA_21_Veranstaltungszelt() As Byte()
+        Friend Shared ReadOnly Property HighQuality__HQ_() As Byte()
             Get
-                Dim obj As Object = ResourceManager.GetObject("SOLA_21_Veranstaltungszelt", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("HighQuality__HQ_", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property LowQuality__LQ_() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("LowQuality__LQ_", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property RAW() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("RAW", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property Veranstaltungszelt() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Veranstaltungszelt", resourceCulture)
                 Return CType(obj,Byte())
             End Get
         End Property

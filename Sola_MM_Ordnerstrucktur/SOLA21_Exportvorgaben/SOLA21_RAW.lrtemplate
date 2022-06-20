@@ -1,7 +1,7 @@
 s = {
 	id = "74A05016-4302-4845-9D32-E391F17EB742",
 	internalName = "SOLA19_Kids_RAW",
-	title = "SOLA20_RAW",
+	title = "SOLA21_RAW",
 	type = "Export",
 	value = {
 		DNG_compatibilityV2 = 184680448,
@@ -44,7 +44,7 @@ s = {
 		size_resolution = 240,
 		size_resolutionUnits = "inch",
 		tokenCustomString = "M.U.",
-		tokens = "{{date_YY}}-{{date_MM}}-{{date_DD}}_{{date_Hour}}_{{date_Minute}}_SOLA19_T_{{custom_token}}_LQ_{{naming_sequenceNumber_3Digits}}_{{image_name}}",
+		tokens = "{{date_YY}}-{{date_MM}}-{{date_DD}}_{{date_Hour}}_{{date_Minute}}__SOLA22_Teens_{{custom_token}}_LQ_{{naming_sequenceNumber_3Digits}}_{{image_name}}",
 		tokensArchivedToString2 = "{{custom_token}} ({{naming_sequenceNumber_1Digit}} von {{naming_sequenceTotal_1Digit}})",
 		useWatermark = false,
 		watermarking_id = "<simpleCopyrightWatermark>",

@@ -31,6 +31,7 @@ Partial Class Form1
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.Ordnerstrucktur = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.LabelPfad = New System.Windows.Forms.Label()
         Me.DataLoad = New System.Windows.Forms.Button()
         Me.DataSave = New System.Windows.Forms.Button()
@@ -132,12 +133,14 @@ Partial Class Form1
         Me.DateTimePickerTeen = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.CheckBoxTeen = New System.Windows.Forms.CheckBox()
-        Me.Lightroom = New System.Windows.Forms.TabPage()
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.TabControl.SuspendLayout()
         Me.Ordnerstrucktur.SuspendLayout()
         Me.GroupBoxKids.SuspendLayout()
         Me.GroupBoxTeens.SuspendLayout()
         Me.SuspendLayout()
+        Me.OokiiDialog = New Ookii.Dialogs.Wpf.VistaFolderBrowserDialog()
         '
         'Label15
         '
@@ -200,8 +203,7 @@ Partial Class Form1
         'TabControl
         '
         Me.TabControl.Controls.Add(Me.Ordnerstrucktur)
-        Me.TabControl.Controls.Add(Me.Lightroom)
-        Me.TabControl.Location = New System.Drawing.Point(7, 10)
+        Me.TabControl.Location = New System.Drawing.Point(4, 10)
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedIndex = 0
         Me.TabControl.Size = New System.Drawing.Size(1191, 723)
@@ -209,6 +211,7 @@ Partial Class Form1
         '
         'Ordnerstrucktur
         '
+        Me.Ordnerstrucktur.Controls.Add(Me.Button1)
         Me.Ordnerstrucktur.Controls.Add(Me.LabelPfad)
         Me.Ordnerstrucktur.Controls.Add(Me.DataLoad)
         Me.Ordnerstrucktur.Controls.Add(Me.DataSave)
@@ -223,6 +226,15 @@ Partial Class Form1
         Me.Ordnerstrucktur.TabIndex = 0
         Me.Ordnerstrucktur.Text = "Ordnerstrucktur"
         Me.Ordnerstrucktur.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(18, 636)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(127, 30)
+        Me.Button1.TabIndex = 62
+        Me.Button1.Text = "Install LR Preset"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'LabelPfad
         '
@@ -1250,14 +1262,10 @@ Partial Class Form1
         Me.CheckBoxTeen.Text = "Teen Sola"
         Me.CheckBoxTeen.UseVisualStyleBackColor = True
         '
-        'Lightroom
+        'OpenFileDialog1
         '
-        Me.Lightroom.Location = New System.Drawing.Point(4, 22)
-        Me.Lightroom.Name = "Lightroom"
-        Me.Lightroom.Size = New System.Drawing.Size(1183, 697)
-        Me.Lightroom.TabIndex = 1
-        Me.Lightroom.Text = "Lightroom"
-        Me.Lightroom.UseVisualStyleBackColor = True
+        Me.OpenFileDialog1.AddExtension = False
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
         'Form1
         '
@@ -1394,5 +1402,8 @@ Partial Class Form1
     Friend WithEvents DataSave As Button
     Friend WithEvents ButtonStrucktur As Button
     Friend WithEvents ButtonPicPfad As Button
-    Friend WithEvents Lightroom As TabPage
+    Friend WithEvents Button1 As Button
+    Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents OokiiDialog As Ookii.Dialogs.Wpf.VistaFolderBrowserDialog
 End Class

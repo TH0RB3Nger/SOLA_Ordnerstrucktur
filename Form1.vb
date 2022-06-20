@@ -13,7 +13,7 @@ Public Class Form1
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Test
+
     End Sub
     Function SolaJahr() As String
         Dim sJahr As String
@@ -36,6 +36,9 @@ Public Class Form1
                     bSolaJahrMan = True
                 End If
             End If
+        Else
+            MsgBox("Es wurde kein SOLA ausgewählt !", vbExclamation)
+            sJahr = ""
         End If
         Return sJahr
     End Function
@@ -187,10 +190,84 @@ Public Class Form1
 
     End Sub
 
+
+
+    Private Sub Button1_Click_Install_LR_Preset(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim maxRetry As Integer = 0
+Retry:
+        Dim bOK As Boolean
+        Dim aOK(4) As Boolean
+        Dim sDestPfad As String = "\Adobe\Lightroom\Export Presets\User Presets"
+        Dim appdata As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+        Dim sExtention As String = ".lrtemplate"
+        System.IO.File.WriteAllBytes(appdata & sDestPfad & "\" & "HighQuality_HQ_" & sExtention, My.Resources.Resource1.HighQuality__HQ_)
+        System.IO.File.WriteAllBytes(appdata & sDestPfad & "\" & "HighQuality_LQ_" & sExtention, My.Resources.Resource1.LowQuality__LQ_)
+        System.IO.File.WriteAllBytes(appdata & sDestPfad & "\" & "RAW" & sExtention, My.Resources.Resource1.RAW)
+        If System.IO.File.Exists(appdata & sDestPfad & "\" & "HighQuality_HQ_" & sExtention) And System.IO.File.Exists(appdata & sDestPfad & "\" & "HighQuality_LQ_" & sExtention) And System.IO.File.Exists(appdata & sDestPfad & "\" & "HighQuality_LQ_" & sExtention) Then
+            bOK = True
+            For x = 0 To 2
+                aOK(x) = True
+            Next
+        Else
+            aOK(0) = System.IO.File.Exists(appdata & sDestPfad & "\" & "HighQuality_HQ_" & sExtention)
+            aOK(1) = System.IO.File.Exists(appdata & sDestPfad & "\" & "HighQuality_LQ_" & sExtention)
+            aOK(2) = System.IO.File.Exists(appdata & sDestPfad & "\" & "RAW" & sExtention)
+        End If
+        sDestPfad = "\Adobe\Lightroom\Develop Presets"
+        sExtention = ".xmp"
+        System.IO.File.WriteAllBytes(appdata & sDestPfad & "\" & "SOLA_Draußen" & sExtention, My.Resources.Resource1.draußen)
+        System.IO.File.WriteAllBytes(appdata & sDestPfad & "\" & "SOLA_Veranstaltungszelt" & sExtention, My.Resources.Resource1.Veranstaltungszelt)
+        If System.IO.File.Exists(appdata & sDestPfad & "\" & "SOLA_Draußen" & sExtention) And System.IO.File.Exists(appdata & sDestPfad & "\" & "SOLA_Veranstaltungszelt" & sExtention) Then
+            For x = 3 To 4
+                aOK(x) = True
+            Next
+            If bOK Then
+                MsgBox("Exportvorlagen und Presets erfolgreich kopiert." & vbNewLine & "Bitte in Lightroom das Jahr und das Namenskürzel ändern.", MsgBoxStyle.Information, "LR Preset erfolgreich kopiert")
+            Else
+                GoTo Diag
+            End If
+
+        Else
+            aOK(3) = System.IO.File.Exists(appdata & sDestPfad & "\" & "SOLA_Draußen" & sExtention)
+            aOK(4) = System.IO.File.Exists(appdata & sDestPfad & "\" & "SOLA_Veranstaltungszelt" & sExtention)
+
+            GoTo Diag
+        End If
+        Exit Sub
+Diag:
+        Dim sOk(4) As String
+        For x = 0 To 4
+            If aOK(x) Then
+                sOk(x) = "OK"
+            Else
+                sOk(x) = "NOK"
+            End If
+        Next
+        If maxRetry < 4 Then
+            If MsgBox("Fehler beim erstellen der vorgaben" & vbNewLine & "Exportvorgabe HQ: " & sOk(0) & vbNewLine _
+            & "Exportvorgabe LQ: " & sOk(1) & vbNewLine _
+            & "Exportvorgabe RAW: " & sOk(2) & vbNewLine _
+            & "Entwicklungsvorgabe Draußen: " & sOk(3) & vbNewLine _
+            & "Entwicklungsvorgabe Veranstaltungszelt: " & sOk(4), MsgBoxStyle.RetryCancel, "Fehler") = MsgBoxResult.Retry Then
+                maxRetry = maxRetry + 1
+                GoTo Retry
+            Else
+                Exit Sub
+            End If
+        Else
+            MsgBox("Fehler beim erstellen der vorgaben" & vbNewLine & "Exportvorgabe HQ: " & sOk(0) & vbNewLine _
+            & "Exportvorgabe LQ: " & sOk(1) & vbNewLine _
+            & "Exportvorgabe RAW: " & sOk(2) & vbNewLine _
+            & "Entwicklungsvorgabe Draußen: " & sOk(3) & vbNewLine _
+            & "Entwicklungsvorgabe Veranstaltungszelt: " & sOk(4), MsgBoxStyle.OkCancel, "Fehler")
+        End If
+    End Sub
+
     Private Sub DateTimePickerTeen_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePickerTeen.ValueChanged
         bSolaJahrMan = False
         Berechne_Woche(sender.Value, True)
     End Sub
+
 
 
     Private Sub DateTimePickerKids_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePickerKids.ValueChanged
@@ -198,6 +275,9 @@ Public Class Form1
         Berechne_Woche(sender.Value, False)
     End Sub
 
+    Private Sub GroupBoxKids_Enter(sender As Object, e As EventArgs) Handles GroupBoxKids.Enter
+
+    End Sub
 
     Sub Berechne_Woche(startDate As Date, Teen As Boolean)
         Dim dTag As Date
@@ -220,10 +300,12 @@ Public Class Form1
         End If
     End Sub
     Private Sub ButtonStrucktur_Click(sender As Object, e As EventArgs) Handles ButtonStrucktur.Click
-        If (Not Pfad = "") And (Not String.IsNullOrEmpty(Pfad)) Then
+        If Not String.IsNullOrEmpty(Pfad) Then
             Ordnerstrucktur_Erstellen()
         Else
-            MsgBox("Pfadauswahl Fehlerhaft", vbCritical)
+            If MsgBox("Es wurde kein Ordner ausgewählt!" & vbCrLf & "Ordner jetzt wählen ?", vbOKCancel) = vbOK Then
+                Ordnerauswahl_ini()
+            End If
         End If
 
     End Sub
@@ -266,13 +348,14 @@ Public Class Form1
         End If
         Freigabe_Erstellen()
     End Sub
+    Sub Ordnerauswahl_ini()
+        Pfad = Ordnerwahl("Bitte Verzeichnis zum Erstellen der Ordnerstrucktur Wählen")
+        LabelPfad.Text = Pfad
+        Freigabe_Erstellen()
+    End Sub
 
     Private Sub ButtonPicPfad_Click(sender As Object, e As EventArgs) Handles ButtonPicPfad.Click
-        Pfad = Ordnerwahl("Bitte Verzeichnis zum Erstellen der Ordnerstrucktur Wählen")
-        If Not Pfad = "" Then
-            LabelPfad.Text = Pfad
-        End If
-        Freigabe_Erstellen()
+        Ordnerauswahl_ini()
     End Sub
 
 
@@ -391,23 +474,36 @@ Public Class Form1
         Freigabe_Erstellen()
     End Sub
     Function Ordnerwahl(msg As String) As String
-        'Auswahldialog für die Ordnerwahl
-        'Variablen deklaration
-        Dim AppShell As Object
-        Dim BrowseDir
-        Dim Pfad As String
+        ''Auswahldialog für die Ordnerwahl
+        ''Variablen deklaration
+        'Dim AppShell As Object
+        'Dim BrowseDir
+        'Dim Pfad As String
 
-        'Variablen Inizialiesieren
-        AppShell = CreateObject("Shell.Application")
-        BrowseDir = AppShell.BrowseForFolder(0, msg, &H1000, 17)
-        On Error Resume Next
-        Pfad = BrowseDir.Items().Item().Path
-        If Pfad = "" Then
-            Ordnerwahl = ""
-        Else
-            Ordnerwahl = Pfad
+        ''Variablen Inizialiesieren
+        'AppShell = CreateObject("Shell.Application")
+        'BrowseDir = AppShell.BrowseForFolder(0, msg, &H1000, 17)
+        'On Error Resume Next
+        'Pfad = BrowseDir.Items().Item().Path
+        'If Pfad = "" Then
+        '    Ordnerwahl = ""
+        'Else
+        '    Ordnerwahl = Pfad
+        'End If
+        '
+
+        OokiiDialog.Multiselect = False
+        OokiiDialog.ShowNewFolderButton = True
+        OokiiDialog.Description = "Beschreibung"
+        OokiiDialog.UseDescriptionForTitle = True
+
+        OokiiDialog.ShowDialog()
+        If String.IsNullOrEmpty(OokiiDialog.SelectedPath) Then
+            MsgBox("Es wurde kein Ordner ausgewählt!", vbExclamation)
+            Exit Function
         End If
-        Freigabe_Erstellen()
+        Return OokiiDialog.SelectedPath
+
     End Function
     Private Sub Freigabe_Erstellen()
         If Not (Pfad = "" Or String.IsNullOrEmpty(Pfad)) Then
@@ -491,7 +587,7 @@ Public Class Form1
         i = 0
 
         'Stammverzeichniss Wählen
-
+        Delete_Gaps_in_Name()
         Dim j
         Dim Tag
         Dim iZeile
@@ -861,10 +957,58 @@ Public Class Form1
             End If
         Next
     End Sub
+    Sub Delete_Gaps_in_Name()
+        Dim nameTF(9) As String
+        Dim nameTV(9) As String
+        Dim nameKF(9) As String
+        Dim nameKV(9) As String
 
+        Dim j = 0
+        For i = 1 To 10
+            nameTF(i - 1) = Me.GroupBoxTeens.Controls("TextBoxTFoto" & i).Text
+        Next
+        For i = 1 To 10
+            nameTV(i - 1) = Me.GroupBoxTeens.Controls("TextBoxTVideo" & i).Text
+        Next
+        For i = 1 To 10
+            nameKF(i - 1) = Me.GroupBoxKids.Controls("TextBoxKFoto" & i).Text
+        Next
+        For i = 1 To 10
+            nameKV(i - 1) = Me.GroupBoxKids.Controls("TextBoxKVideo" & i).Text
+        Next
+        nameTF = DeletArrayGaps(nameTF)
+        nameTV = DeletArrayGaps(nameTV)
+        nameKF = DeletArrayGaps(nameKF)
+        nameKV = DeletArrayGaps(nameKV)
+        For i = 1 To 10
+            Me.GroupBoxTeens.Controls("TextBoxTFoto" & i).Text = nameTF(i - 1)
+        Next
+        For i = 1 To 10
+            Me.GroupBoxTeens.Controls("TextBoxTVideo" & i).Text = nameTV(i - 1)
+        Next
+        For i = 1 To 10
+            Me.GroupBoxKids.Controls("TextBoxKFoto" & i).Text = nameKF(i - 1)
+        Next
+        For i = 1 To 10
+            Me.GroupBoxKids.Controls("TextBoxKVideo" & i).Text = nameKV(i - 1)
+        Next
+    End Sub
     'TODO: kopiern der Lightroom vorgaben
     'File.WriteAllBytes(My.Computer.FileSystem.SpecialDirectories.Desktop & "\" & strFile, My.Resources.ResourceManager.GetObject(strFileName), True)
     'TODO: Anpassen der Export vorgaben (tokenCustomString = "Inizialien des Users")
     'TODO: Anpasen des tokens (Sola Jahr und woche)
+    Function DeletArrayGaps(Array)
+        Dim tempArray(UBound(Array)) As String
+        Dim j = 0
+        For i = 0 To UBound(Array)
+            If Array(i) <> "" Then
+                ReDim Preserve tempArray(j)
+                tempArray(j) = Array(i)
 
+                j = j + 1
+            End If
+        Next
+        ReDim Preserve tempArray(UBound(Array))
+        Return tempArray
+    End Function
 End Class
