@@ -344,9 +344,6 @@ Diag:
         End If
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs)
-        Edit_Jear_in_Presets()
-    End Sub
 
     Private Sub ButtonStrucktur_Click(sender As Object, e As EventArgs) Handles ButtonStrucktur.Click
         If Not String.IsNullOrEmpty(Pfad) Then
