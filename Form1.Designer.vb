@@ -140,7 +140,6 @@ Partial Class Form1
         Me.GroupBoxKids.SuspendLayout()
         Me.GroupBoxTeens.SuspendLayout()
         Me.SuspendLayout()
-        Me.OokiiDialog = New Ookii.Dialogs.Wpf.VistaFolderBrowserDialog()
         '
         'Label15
         '

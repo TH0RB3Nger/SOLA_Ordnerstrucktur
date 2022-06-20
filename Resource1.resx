@@ -124,6 +124,9 @@
   <data name="HighQuality__HQ_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Sola_MM_Ordnerstrucktur\SOLA21_Exportvorgaben\SOLA21_HighQuality (HQ).lrtemplate;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="HighQuality__HQ_Txt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sola_mm_ordnerstrucktur\sola21_exportvorgaben\txt\highquality (hq)txt.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="LowQuality__LQ_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Sola_MM_Ordnerstrucktur\SOLA21_Exportvorgaben\SOLA21_LowQuality (LQ).lrtemplate;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

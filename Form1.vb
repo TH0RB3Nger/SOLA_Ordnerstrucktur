@@ -194,6 +194,7 @@ Public Class Form1
 
 
     Private Sub Button1_Click_Install_LR_Preset(sender As Object, e As EventArgs) Handles Button1.Click
+        'Exportiert die Lightrom Presets
         Dim maxRetry As Integer = 0
 Retry:
         Dim bOK As Boolean
@@ -264,6 +265,50 @@ Diag:
         End If
     End Sub
 
+    Function Edit_Jear_in_Presets()
+        'Baustelle zum eintragen der Richtigen Werte in die Resurcen (Presets [Jahr, Sola, Kürzel])
+        Dim sFileOutput As String()
+        Dim sJear As String
+        Dim sSOLA As String
+        Dim sKürzel As String
+        Dim OK As Boolean()
+        sJear = CStr(Format(Now, "yy"))
+        If MsgBox("Soll für das Teen Sola vorbereitet werden ?", vbYesNo) = vbYes Then sSOLA = "Teens" Else sSOLA = "Kids"
+        sKürzel = InputBox("Bitte gib dein Kürzel ein")
+
+        sFileOutput = System.IO.File.ReadAllLines(My.Resources.Resource1.HighQuality__HQ_Txt)
+        For iIndex = 0 To sFileOutput.Length
+            If sFileOutput(iIndex).IndexOf("internalName") > -1 Then
+                sFileOutput(iIndex) = " 	internalName = " & Chr(34) & "SOLA" & sJear & "_" & sSOLA & "_HighQuality(HQ)" & Chr(34) & ","
+                OK(1) = True
+                Continue For
+            End If
+            If sFileOutput(iIndex).IndexOf("title") > -1 Then
+                sFileOutput(iIndex) = "	title = " & Chr(34) & "SOLA" & sJear & "_" & sSOLA & "_HighQuality (HQ)" & Chr(34) & ","
+                OK(2) = True
+                Continue For
+            End If
+            If sFileOutput(iIndex).IndexOf("tokenCustomString") > -1 Then
+                sFileOutput(iIndex) = "		tokenCustomString = " & Chr(34) & sKürzel & Chr(34) & ","
+                OK(3) = True
+                Continue For
+            End If
+            If sFileOutput(iIndex).IndexOf("tokens") > -1 Then
+                sFileOutput(iIndex) = "tokens = " & Chr(34) & "{{date_YY}} - {{date_MM}} - {{date_DD}}__{{date_Hour}}-{{date_Minute}}-{{date_Second}}__SOLA" & sJear & "_" & sSOLA & "_{{custom_token}}_HQ_{{image_name}}" & Chr(34) & ","
+                OK(4) = True
+                Continue For
+            End If
+        Next
+        If OK(1) And OK(2) And OK(3) And OK(4) Then
+            System.IO.File.WriteAllLines(My.Resources.Resource1.HighQuality__HQ_Txt, sFileOutput)
+            Return True
+            Exit Function
+        Else
+            MsgBox("Anscheinend ist was Schiefgelaufen beim Vorbereiten", vbAbort)
+        End If
+        Return False
+    End Function
+
     Private Sub DateTimePickerTeen_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePickerTeen.ValueChanged
         bSolaJahrMan = False
         Berechne_Woche(sender.Value, True)
@@ -276,9 +321,7 @@ Diag:
         Berechne_Woche(sender.Value, False)
     End Sub
 
-    Private Sub GroupBoxKids_Enter(sender As Object, e As EventArgs) Handles GroupBoxKids.Enter
 
-    End Sub
 
     Sub Berechne_Woche(startDate As Date, Teen As Boolean)
         Dim dTag As Date
@@ -300,6 +343,11 @@ Diag:
             Next
         End If
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
+        Edit_Jear_in_Presets()
+    End Sub
+
     Private Sub ButtonStrucktur_Click(sender As Object, e As EventArgs) Handles ButtonStrucktur.Click
         If Not String.IsNullOrEmpty(Pfad) Then
             Ordnerstrucktur_Erstellen()
@@ -372,10 +420,6 @@ Diag:
         System.Diagnostics.Process.Start("https://www.instagram.com/der.torsten/")
         LinkLabel1.LinkVisited = True
     End Sub
-
-
-
-
     Private Sub CheckBoxTeen_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxTeen.CheckedChanged
         'Wenn aktiviert werden die Elemente freigegeben und der Zustand in der Variable gespeichert
         If CheckBoxTeen.Checked Then

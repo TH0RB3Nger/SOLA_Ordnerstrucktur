@@ -1,7 +1,7 @@
-s = {
+﻿s = {
 	id = "E9E9A084-ED97-4B79-9B31-D0A81742FB90",
-	internalName = "SOLAXX_Teens_HighQuality (HQ)",
-	title = "SOLAXX_Teens_HighQuality (HQ)",
+	internalName = "SOLA19_Kids_HighQuality (HQ)",
+	title = "SOLA21_Teens_HighQuality (HQ)",
 	type = "Export",
 	value = {
 		DNG_compatibilityV2 = 184680448,
