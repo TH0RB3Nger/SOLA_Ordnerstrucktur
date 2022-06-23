@@ -22,7 +22,7 @@
     End Property
     Private Sub TextBox_Kürzel_TextChanged(sender As Object, e As EventArgs) Handles TextBox_Kürzel.MouseLeave
         Dim ValidateStrOutput As (boolErgebnis As Boolean, OutString As String)
-        ValidateStrOutput = Tools.ValidateStr(sender.Text, sPattern)
+        ValidateStrOutput = Tools.ValidateStrKürzel(sender.Text)
 
         Me.TextBox_Kürzel.Text = ValidateStrOutput.OutString
         Me.Button_Teen.Enabled = ValidateStrOutput.boolErgebnis

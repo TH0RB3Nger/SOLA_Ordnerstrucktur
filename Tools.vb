@@ -53,14 +53,12 @@ Public Class Tools
         '    bValid = True
         'End If
         'Return (bValid, sJear, sSOLA, sKürzel)
-        Const sKürzel_regex As String = "" 'TODO: Regex anpassen
-        '^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$
+
         Dim sJear As String
         Dim Dialog_Data_input As New LR_Preset_Input
         Dim sSola As String = ""
         Dim iValid As Integer = 0
         Dim sKürzel As String = ""
-        Dialog_Data_input.Kürzel_Regex = sKürzel_regex
         Dialog_Data_input.ShowDialog()
         Select Case Dialog_Data_input.DialogResult
             Case 1 'Teen
@@ -196,6 +194,16 @@ Public Class Tools
         End If
         NameNotEmpty = False
 
+    End Function
+    Function ValidateStrKürzel(iStr As String) As (boolErgebnis As Boolean, inputString As String)
+        ' Dim sPattern As String = "/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/gi" 
+        Dim rx As New Regex("^(?:(?:[a-zA-Z]{1,2}(?:\.))+)$")
+        Dim Matches As MatchCollection = rx.Matches(iStr)
+        If Matches.Count > 0 Then
+            Return (True, Matches(0).Value)
+        Else
+            Return (False, "")
+        End If
     End Function
     Function ValidateStr(iStr As String, Pattern As String) As (boolErgebnis As Boolean, inputString As String)
         ' Dim sPattern As String = "/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/gi" 
