@@ -1,4 +1,5 @@
 ﻿Public Class LR_Preset_Input
+    'TODO Code Komentieren
     Inherits Form
     Dim sPattern As String
     Dim bClose As Boolean = False
@@ -19,7 +20,6 @@
         End Set
     End Property
     Private Sub TextBox_Kürzel_TextChanged(sender As Object, e As EventArgs) Handles TextBox_Kürzel.MouseLeave
-        'Const sPattern As String = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
         Dim ValidateStrOutput As (boolErgebnis As Boolean, OutString As String)
         ValidateStrOutput = Main_Form.ValidateStr(sender.Text, sPattern)
 

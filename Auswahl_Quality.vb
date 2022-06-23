@@ -1,4 +1,5 @@
 ﻿Public Class Auswahl_Quality
+    'TODO Code Komentieren
     Inherits Form
 
     Private Sub Button_HQ_Click(sender As Object, e As EventArgs) Handles Button_HQ.Click

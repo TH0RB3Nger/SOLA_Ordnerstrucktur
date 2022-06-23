@@ -1,7 +1,8 @@
 ﻿Imports System.Text.RegularExpressions
 Imports System.Resources
 'Made By Thorben Renfordt
-
+'TODO Funktionen die auserhalb genutzt werden auslagern
+'TODO Code Komentieren!
 Public Class Main_Form
     'TODO: Speichern und Laden Datumswerte unteschiedlich !!
     'Allgemeine Variablen (Daten)
@@ -361,7 +362,8 @@ Diag:
         '    bValid = True
         'End If
         'Return (bValid, sJear, sSOLA, sKürzel)
-        Const sKürzel_regex As String = "" 'TODO: Aktuell sind keine Zahlen hinter dem Namen erlaubt  ^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$
+        Const sKürzel_regex As String = "" 'TODO: Regex anpassen
+        '^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$
         Dim sJear As String
         Dim Dialog_Data_input As New LR_Preset_Input
         Dim sSola As String = ""
@@ -391,11 +393,6 @@ Diag:
         Return (iValid, sJear, sSola, sKürzel)
     End Function
     Function Edit_Jear_in_Presets(Pfad As String, Select_Data As (Valid As Boolean, Year As String, Sola As String, Kürzel As String))
-        'TODO zum eintragen der Richtigen Werte in die Resurcen (Presets [Jahr, Sola, Kürzel])
-        '#############################
-        '#############################
-        '#############################
-        '#############################
         Dim sFileOutput As String()
         Dim OK_Writeline(3) As (Name As String, Found As Boolean)
         Dim sFehlerBeschreibung As String = ""
@@ -1205,10 +1202,6 @@ Diag:
             Me.GroupBoxKids.Controls("TextBoxKVideo" & i).Text = nameKV(i - 1)
         Next
     End Sub
-    'TODO: kopiern der Lightroom vorgaben
-    'File.WriteAllBytes(My.Computer.FileSystem.SpecialDirectories.Desktop & "\" & strFile, My.Resources.ResourceManager.GetObject(strFileName), True)
-    'TODO: Anpassen der Export vorgaben (tokenCustomString = "Inizialien des Users")
-    'TODO: Anpasen des tokens (Sola Jahr und woche)
     Function DeletArrayGaps(Array)
         Dim tempArray(UBound(Array)) As String
         Dim j = 0
