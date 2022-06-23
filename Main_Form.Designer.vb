@@ -1417,4 +1417,5 @@ Partial Class Main_Form
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents OokiiDialog As Ookii.Dialogs.Wpf.VistaFolderBrowserDialog
     Friend WithEvents Button2 As Button
+
 End Class

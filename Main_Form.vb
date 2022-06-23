@@ -16,6 +16,7 @@ Public Class Main_Form
     Dim bSolaJahrMan As Boolean
     Dim DL As Char = ";"
     Dim Tools As New Tools
+    Dim Pfad
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -371,7 +372,7 @@ Diag:
 
     End Sub
 
-    Dim Pfad
+
 
     Private Sub TextBoxTFoto1_TextChanged(sender As Object, e As EventArgs) Handles TextBoxTFoto1.Leave, TextBoxTFoto2.Leave, TextBoxTFoto3.Leave, TextBoxTFoto4.Leave, TextBoxTFoto5.Leave, TextBoxTFoto6.Leave, TextBoxTFoto7.Leave, TextBoxTFoto8.Leave, TextBoxTFoto9.Leave, TextBoxTFoto10.Leave, TextBoxTVideo1.Leave, TextBoxTVideo2.Leave, TextBoxTVideo3.Leave, TextBoxTVideo4.Leave, TextBoxTVideo5.Leave, TextBoxTVideo6.Leave, TextBoxTVideo7.Leave, TextBoxTVideo8.Leave, TextBoxTVideo9.Leave, TextBoxTVideo10.Leave, TextBoxKFoto1.Leave, TextBoxKFoto2.Leave, TextBoxKFoto3.Leave, TextBoxKFoto4.Leave, TextBoxKFoto5.Leave, TextBoxKFoto6.Leave, TextBoxKFoto7.Leave, TextBoxKFoto8.Leave, TextBoxKFoto9.Leave, TextBoxKFoto10.Leave, TextBoxKVideo1.Leave, TextBoxKVideo2.Leave, TextBoxKVideo3.Leave, TextBoxKVideo4.Leave, TextBoxKVideo5.Leave, TextBoxKVideo6.Leave, TextBoxKVideo7.Leave, TextBoxKVideo8.Leave, TextBoxKVideo9.Leave, TextBoxKVideo10.Leave
         Const sPattern As String = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" 'TODO: Aktuell sind keine Zahlen hinter dem Namen erlaubt
@@ -533,25 +534,10 @@ Diag:
     End Sub
     Function Ordnerwahl(msg As String) As String
         ''Auswahldialog für die Ordnerwahl
-        ''Variablen deklaration
-        'Dim AppShell As Object
-        'Dim BrowseDir
-        'Dim Pfad As String
 
-        ''Variablen Inizialiesieren
-        'AppShell = CreateObject("Shell.Application")
-        'BrowseDir = AppShell.BrowseForFolder(0, msg, &H1000, 17)
-        'On Error Resume Next
-        'Pfad = BrowseDir.Items().Item().Path
-        'If Pfad = "" Then
-        '    Ordnerwahl = ""
-        'Else
-        '    Ordnerwahl = Pfad
-        'End If
-        '
         OokiiDialog.Multiselect = False
         OokiiDialog.ShowNewFolderButton = True
-        OokiiDialog.Description = "Beschreibung"
+        OokiiDialog.Description = msg
         OokiiDialog.UseDescriptionForTitle = True
 
         OokiiDialog.ShowDialog()
