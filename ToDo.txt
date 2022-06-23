@@ -1,0 +1,13 @@
+﻿ToDo Liste:
+		Bugs:
+
+
+
+		Features:
+[offen]		- Function: Edit_Jear_in_Presets 
+				zum eintragen der Richtigen Werte in die Resurcen (Presets [Jahr, Sola, Kürzel]
+				[offen]	-> Resurcendatei Bearbeiten aus dem code heraus
+				[test]	-> Ensprechende zeilen automatisch finden und ersetzen
+				[offen]	-> Eingabe des Kürzels mit regex prüfen (z.b. T.R. oder M.U.)
+
+

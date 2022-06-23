@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form1
+Partial Class Main_Form
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
@@ -22,7 +22,7 @@ Partial Class Form1
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main_Form))
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label51 = New System.Windows.Forms.Label()
@@ -31,6 +31,7 @@ Partial Class Form1
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.Ordnerstrucktur = New System.Windows.Forms.TabPage()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.LabelPfad = New System.Windows.Forms.Label()
         Me.DataLoad = New System.Windows.Forms.Button()
@@ -210,6 +211,7 @@ Partial Class Form1
         '
         'Ordnerstrucktur
         '
+        Me.Ordnerstrucktur.Controls.Add(Me.Button2)
         Me.Ordnerstrucktur.Controls.Add(Me.Button1)
         Me.Ordnerstrucktur.Controls.Add(Me.LabelPfad)
         Me.Ordnerstrucktur.Controls.Add(Me.DataLoad)
@@ -225,6 +227,15 @@ Partial Class Form1
         Me.Ordnerstrucktur.TabIndex = 0
         Me.Ordnerstrucktur.Text = "Ordnerstrucktur"
         Me.Ordnerstrucktur.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(1015, 641)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 63
+        Me.Button2.Text = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -1405,4 +1416,5 @@ Partial Class Form1
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents OokiiDialog As Ookii.Dialogs.Wpf.VistaFolderBrowserDialog
+    Friend WithEvents Button2 As Button
 End Class

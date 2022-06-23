@@ -1,6 +1,8 @@
 ﻿Imports System.Text.RegularExpressions
+Imports System.Resources
 'Made By Thorben Renfordt
-Public Class Form1
+
+Public Class Main_Form
     'TODO: Speichern und Laden Datumswerte unteschiedlich !!
     'Allgemeine Variablen (Daten)
     Dim sSolaJahr As String
@@ -195,116 +197,286 @@ Public Class Form1
 
     Private Sub Button1_Click_Install_LR_Preset(sender As Object, e As EventArgs) Handles Button1.Click
         'Exportiert die Lightrom Presets
-        Dim maxRetry As Integer = 0
+        Const sDestPfad_devlop_preset As String = "\Adobe\Lightroom\Develop Presets"
+        Const sExtention_devlop_preset As String = ".xmp"
+        Const sExtention_export_Preset As String = ".lrtemplate"
+        Const sDestPfad_export_Preset As String = "\Adobe\Lightroom\Export Presets\User Presets"
+        Const maxRetry As Integer = 3
+        Dim Select_Data_Valid As (IsValid As Integer, NotValid As Integer, cancel As Integer) = (1, 0, 5)
+
+        Dim iRetry As Integer = 0
+        Dim Select_Data As (Valid As Integer, Year As String, Sola As String, Kürzel As String) = (False, "", "", "")
+        Dim i As Integer = 0
 Retry:
-        Dim bOK As Boolean
-        Dim aOK(4) As Boolean
-        Dim sDestPfad As String = "\Adobe\Lightroom\Export Presets\User Presets"
+        Dim bOK_create As Boolean
+        Dim bOK_change As Boolean
+        Dim aOK_create(4) As Boolean
+        Dim aOK_change(4) As Boolean
         Dim appdata As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-        Dim sExtention As String = ".lrtemplate"
-        System.IO.File.WriteAllBytes(appdata & sDestPfad & "\" & "HighQuality_HQ_" & sExtention, My.Resources.Resource1.HighQuality__HQ_)
-        System.IO.File.WriteAllBytes(appdata & sDestPfad & "\" & "HighQuality_LQ_" & sExtention, My.Resources.Resource1.LowQuality__LQ_)
-        System.IO.File.WriteAllBytes(appdata & sDestPfad & "\" & "RAW" & sExtention, My.Resources.Resource1.RAW)
-        If System.IO.File.Exists(appdata & sDestPfad & "\" & "HighQuality_HQ_" & sExtention) And System.IO.File.Exists(appdata & sDestPfad & "\" & "HighQuality_LQ_" & sExtention) And System.IO.File.Exists(appdata & sDestPfad & "\" & "HighQuality_LQ_" & sExtention) Then
-            bOK = True
-            For x = 0 To 2
-                aOK(x) = True
+        Dim sPfadHQ As String = appdata & sDestPfad_export_Preset & "\" & "HighQuality_HQ_" & sExtention_export_Preset
+        Dim sPfadLQ As String = appdata & sDestPfad_export_Preset & "\" & "LowQuality_LQ_" & sExtention_export_Preset
+        Dim sPfadRAW As String = appdata & sDestPfad_export_Preset & "\" & "RAW" & sExtention_export_Preset
+        Dim sPfad_devlop_SOLA_Draußen As String = appdata & sDestPfad_devlop_preset & "\" & "SOLA_Draußen" & sExtention_devlop_preset
+        Dim sPfad_devlop_SOLA_Veranstaltungszelt As String = appdata & sDestPfad_devlop_preset & "\" & "SOLA_Veranstaltungszelt" & sExtention_devlop_preset
+
+
+
+        Select_Data = Select_Data_Preset()
+        Select Case Select_Data.Valid
+            Case Select_Data_Valid.IsValid
+                Exit Select
+            Case Select_Data_Valid.NotValid
+                Select_Data = Select_Data_Preset()
+                Select Case Select_Data.Valid
+                    Case Select_Data_Valid.IsValid
+                        Exit Select
+                    Case Select_Data_Valid.NotValid
+                        Select_Data = Select_Data_Preset()
+                        Select Case Select_Data.Valid
+                            Case Select_Data_Valid.IsValid
+                                Exit Select
+                            Case Select_Data_Valid.NotValid
+                                MsgBox("Ungültige eingaben", vbCritical)
+                                Exit Sub
+                            Case Select_Data_Valid.cancel
+                                Exit Sub
+                        End Select
+                    Case Select_Data_Valid.cancel
+                        Exit Sub
+                End Select
+            Case Select_Data_Valid.cancel
+                Exit Sub
+        End Select
+
+
+
+
+        System.IO.File.WriteAllBytes(sPfadHQ, My.Resources.Resource1.HighQuality__HQ_)
+        aOK_change(0) = Edit_Jear_in_Presets(sPfadHQ, Select_Data)
+        System.IO.File.WriteAllBytes(sPfadLQ, My.Resources.Resource1.LowQuality__LQ_)
+        aOK_change(1) = Edit_Jear_in_Presets(sPfadLQ, Select_Data)
+        System.IO.File.WriteAllBytes(sPfadRAW, My.Resources.Resource1.RAW)
+        aOK_change(2) = Edit_Jear_in_Presets(sPfadRAW, Select_Data)
+
+        If System.IO.File.Exists(sPfadHQ) And System.IO.File.Exists(sPfadLQ) And System.IO.File.Exists(sPfadRAW) Then
+            bOK_create = True
+            For i = 0 To 2
+                aOK_create(i) = True
             Next
         Else
-            aOK(0) = System.IO.File.Exists(appdata & sDestPfad & "\" & "HighQuality_HQ_" & sExtention)
-            aOK(1) = System.IO.File.Exists(appdata & sDestPfad & "\" & "HighQuality_LQ_" & sExtention)
-            aOK(2) = System.IO.File.Exists(appdata & sDestPfad & "\" & "RAW" & sExtention)
+            aOK_create(0) = System.IO.File.Exists(sPfadHQ)
+            aOK_create(1) = System.IO.File.Exists(sPfadLQ)
+            aOK_create(2) = System.IO.File.Exists(sPfadRAW)
         End If
-        sDestPfad = "\Adobe\Lightroom\Develop Presets"
-        sExtention = ".xmp"
-        System.IO.File.WriteAllBytes(appdata & sDestPfad & "\" & "SOLA_Draußen" & sExtention, My.Resources.Resource1.draußen)
-        System.IO.File.WriteAllBytes(appdata & sDestPfad & "\" & "SOLA_Veranstaltungszelt" & sExtention, My.Resources.Resource1.Veranstaltungszelt)
-        If System.IO.File.Exists(appdata & sDestPfad & "\" & "SOLA_Draußen" & sExtention) And System.IO.File.Exists(appdata & sDestPfad & "\" & "SOLA_Veranstaltungszelt" & sExtention) Then
-            For x = 3 To 4
-                aOK(x) = True
+
+        For i = 0 To 2
+            If aOK_change(i) Then
+                bOK_change = True
+            Else
+                bOK_change = False
+                Exit For
+            End If
+        Next
+
+
+        System.IO.File.WriteAllBytes(sPfad_devlop_SOLA_Draußen, My.Resources.Resource1.draußen)
+        System.IO.File.WriteAllBytes(sPfad_devlop_SOLA_Veranstaltungszelt, My.Resources.Resource1.Veranstaltungszelt)
+        If System.IO.File.Exists(sPfad_devlop_SOLA_Draußen) And System.IO.File.Exists(sPfad_devlop_SOLA_Veranstaltungszelt) Then
+            For i = 3 To 4
+                aOK_create(i) = True
             Next
-            If bOK Then
-                MsgBox("Exportvorlagen und Presets erfolgreich kopiert." & vbNewLine & "Bitte in Lightroom das Jahr und das Namenskürzel ändern.", MsgBoxStyle.Information, "LR Preset erfolgreich kopiert")
+            If bOK_create And bOK_change Then
+                MsgBox("Exportvorlagen und Presets erfolgreich kopiert." & vbNewLine & "Exportvorlagen Erfolgreich angepasst", MsgBoxStyle.Information, "LR Preset erfolgreich kopiert")
             Else
                 GoTo Diag
             End If
 
         Else
-            aOK(3) = System.IO.File.Exists(appdata & sDestPfad & "\" & "SOLA_Draußen" & sExtention)
-            aOK(4) = System.IO.File.Exists(appdata & sDestPfad & "\" & "SOLA_Veranstaltungszelt" & sExtention)
+            aOK_create(3) = System.IO.File.Exists(sPfad_devlop_SOLA_Draußen)
+            aOK_create(4) = System.IO.File.Exists(sPfad_devlop_SOLA_Veranstaltungszelt)
 
             GoTo Diag
         End If
         Exit Sub
 Diag:
-        Dim sOk(4) As String
-        For x = 0 To 4
-            If aOK(x) Then
-                sOk(x) = "OK"
-            Else
-                sOk(x) = "NOK"
+        Dim sOk_create(4) As String
+        Dim sOk_change(4) As String
+        Dim x As Integer = -1
+        Dim y As Integer = -1
+        Dim doRetry As Boolean = False
+        If iRetry < maxRetry Then
+            If Not bOK_create Then
+                For Each Bool In aOK_create
+                    x = x + 1
+                    If Bool Then sOk_create(x) = "OK" Else sOk_create(x) = "NOK"
+                Next
+                If MsgBox("Fehler beim erstellen der vorgaben" & vbNewLine & "Exportvorgabe HQ: " & sOk_create(0) & vbNewLine _
+                        & "Exportvorgabe LQ: " & sOk_create(1) & vbNewLine _
+                        & "Exportvorgabe RAW: " & sOk_create(2) & vbNewLine _
+                        & "Entwicklungsvorgabe Draußen: " & sOk_create(3) & vbNewLine _
+                        & "Entwicklungsvorgabe Veranstaltungszelt: " & sOk_create(4), MsgBoxStyle.RetryCancel, "Fehler") = MsgBoxResult.Retry Then
+
+                    doRetry = True
+                End If
             End If
-        Next
-        If maxRetry < 4 Then
-            If MsgBox("Fehler beim erstellen der vorgaben" & vbNewLine & "Exportvorgabe HQ: " & sOk(0) & vbNewLine _
-            & "Exportvorgabe LQ: " & sOk(1) & vbNewLine _
-            & "Exportvorgabe RAW: " & sOk(2) & vbNewLine _
-            & "Entwicklungsvorgabe Draußen: " & sOk(3) & vbNewLine _
-            & "Entwicklungsvorgabe Veranstaltungszelt: " & sOk(4), MsgBoxStyle.RetryCancel, "Fehler") = MsgBoxResult.Retry Then
-                maxRetry = maxRetry + 1
+
+            If Not bOK_change Then
+                For Each Bool As Boolean In aOK_change
+                    y = y + 1
+                    If Bool Then sOk_change(y) = "OK" Else sOk_change(x) = "NOK"
+                Next
+                If MsgBox("Fehler beim ändern der vorgaben" & vbNewLine & "Exportvorgabe HQ: " & sOk_change(0) & vbNewLine _
+                            & "Exportvorgabe LQ: " & sOk_change(1) & vbNewLine _
+                            & "Exportvorgabe RAW: " & sOk_change(2) & vbNewLine, MsgBoxStyle.RetryCancel, "Fehler") = MsgBoxResult.Retry Then
+
+                    doRetry = True
+                End If
+            End If
+            If doRetry Then
+                iRetry = iRetry + 1
                 GoTo Retry
-            Else
-                Exit Sub
             End If
         Else
-            MsgBox("Fehler beim erstellen der vorgaben" & vbNewLine & "Exportvorgabe HQ: " & sOk(0) & vbNewLine _
-            & "Exportvorgabe LQ: " & sOk(1) & vbNewLine _
-            & "Exportvorgabe RAW: " & sOk(2) & vbNewLine _
-            & "Entwicklungsvorgabe Draußen: " & sOk(3) & vbNewLine _
-            & "Entwicklungsvorgabe Veranstaltungszelt: " & sOk(4), MsgBoxStyle.OkCancel, "Fehler")
+            MsgBox("Fehler beim erstellen der vorgaben" & vbNewLine & "Exportvorgabe HQ: " & sOk_create(0) & vbNewLine _
+            & "Exportvorgabe LQ: " & sOk_create(1) & vbNewLine _
+            & "Exportvorgabe RAW: " & sOk_create(2) & vbNewLine _
+            & "Entwicklungsvorgabe Draußen: " & sOk_create(3) & vbNewLine _
+            & "Entwicklungsvorgabe Veranstaltungszelt: " & sOk_create(4) & vbNewLine _
+            & "Fehler beim ändern der vorgaben" & vbNewLine & "Exportvorgabe HQ: " & sOk_change(0) & vbNewLine _
+            & "Exportvorgabe LQ: " & sOk_change(1) & vbNewLine _
+            & "Exportvorgabe RAW: " & sOk_change(2), MsgBoxStyle.OkCancel, "Fehler")
         End If
     End Sub
-
-    Function Edit_Jear_in_Presets()
-        'Baustelle zum eintragen der Richtigen Werte in die Resurcen (Presets [Jahr, Sola, Kürzel])
-        Dim sFileOutput As String()
+    Function Select_Data_Preset() As (Valid As Integer, Year As String, Sola As String, Kürzel As String)
+        'Dim sJear As String
+        'Dim sSOLA As String
+        'Dim sKürzel As String
+        'Dim bValid As Boolean = False
+        'If MsgBox("Soll für das Teen Sola vorbereitet werden ?", vbYesNo) = vbYes Then sSOLA = "Teens" Else sSOLA = "Kids"
+        'sKürzel = InputBox("Bitte gib dein Kürzel ein")
+        ''Regex überprüfung
+        'sJear = CStr(Format(Now, "yy"))
+        'If String.IsNullOrEmpty(sJear) Or String.IsNullOrEmpty(sSOLA) Or String.IsNullOrEmpty(sKürzel) Then
+        '    MsgBox("Ungültige Eingabe", vbAbort)
+        'Else
+        '    bValid = True
+        'End If
+        'Return (bValid, sJear, sSOLA, sKürzel)
+        Const sKürzel_regex As String = "" 'TODO: Aktuell sind keine Zahlen hinter dem Namen erlaubt  ^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$
         Dim sJear As String
-        Dim sSOLA As String
-        Dim sKürzel As String
-        Dim OK As Boolean()
+        Dim Dialog_Data_input As New LR_Preset_Input
+        Dim sSola As String = ""
+        Dim iValid As Integer = 0
+        Dim sKürzel As String = ""
+        Dialog_Data_input.Kürzel_Regex = sKürzel_regex
+        Dialog_Data_input.ShowDialog()
+        Select Case Dialog_Data_input.DialogResult
+            Case 1 'Teen
+                sSola = "Teens"
+            Case 2 'Kids
+                sSola = "Kids"
+            Case Else
+                sSola = ""
+                iValid = 5
+                Return (iValid, sJear, sSola, sKürzel)
+                Exit Function
+        End Select
+        sKürzel = Dialog_Data_input.Kürzel
         sJear = CStr(Format(Now, "yy"))
-        If MsgBox("Soll für das Teen Sola vorbereitet werden ?", vbYesNo) = vbYes Then sSOLA = "Teens" Else sSOLA = "Kids"
-        sKürzel = InputBox("Bitte gib dein Kürzel ein")
+        If String.IsNullOrEmpty(sJear) Or String.IsNullOrEmpty(sSola) Or String.IsNullOrEmpty(sKürzel) Then
+            'MsgBox("Ungültige Eingabe", vbAbort)
+            iValid = 0
+        Else
+            iValid = 1
+        End If
+        Return (iValid, sJear, sSola, sKürzel)
+    End Function
+    Function Edit_Jear_in_Presets(Pfad As String, Select_Data As (Valid As Boolean, Year As String, Sola As String, Kürzel As String))
+        'TODO zum eintragen der Richtigen Werte in die Resurcen (Presets [Jahr, Sola, Kürzel])
+        '#############################
+        '#############################
+        '#############################
+        '#############################
+        Dim sFileOutput As String()
+        Dim OK_Writeline(3) As (Name As String, Found As Boolean)
+        Dim sFehlerBeschreibung As String = ""
+        Dim bFault_Writelines As Boolean = False
+        Dim sQuality_long As String = ""
+        Dim sQuality_short As String = ""
+        Dim myMsgbox As New Auswahl_Quality
 
-        sFileOutput = System.IO.File.ReadAllLines(My.Resources.Resource1.HighQuality__HQ_Txt)
-        For iIndex = 0 To sFileOutput.Length
-            If sFileOutput(iIndex).IndexOf("internalName") > -1 Then
-                sFileOutput(iIndex) = " 	internalName = " & Chr(34) & "SOLA" & sJear & "_" & sSOLA & "_HighQuality(HQ)" & Chr(34) & ","
-                OK(1) = True
+        Select Case True
+            Case Pfad.IndexOf("HighQuality_HQ") > -1
+                sQuality_long = "HighQuality (HQ)"
+                sQuality_short = "HQ"
+            Case Pfad.IndexOf("LowQuality_LQ") > -1
+                sQuality_long = "LowQuality (LQ)"
+                sQuality_short = "LQ"
+            Case Pfad.IndexOf("RAW") > -1
+                sQuality_long = "RAW"
+                sQuality_short = "RAW"
+            Case Else
+                myMsgbox.Text = "Help"
+                myMsgbox.Textbox_Pfad.Text = Pfad
+                myMsgbox.ShowDialog()
+                Select Case myMsgbox.DialogResult
+                    Case 3
+                        sQuality_long = "HighQuality (HQ)"
+                    Case 5
+                        sQuality_long = "LowQuality (LQ)"
+                    Case 7
+                        sQuality_long = "RAW"
+                    Case vbCancel
+                        Return False
+                        Exit Function
+                    Case Else
+                        Return False
+                        Exit Function
+                End Select
+        End Select
+
+
+        sFileOutput = System.IO.File.ReadAllLines(Pfad)
+        For iIndex = 0 To sFileOutput.Length - 1
+            If sFileOutput(iIndex).IndexOf("internalName =") > -1 Then
+                sFileOutput(iIndex) = vbTab & "internalName = " & Chr(34) & "SOLA" & Select_Data.Year & "_" & Select_Data.Sola & "_" & sQuality_long & Chr(34) & ","
+                OK_Writeline(0).Name = "internalName"
+                OK_Writeline(0).Found = True
                 Continue For
             End If
-            If sFileOutput(iIndex).IndexOf("title") > -1 Then
-                sFileOutput(iIndex) = "	title = " & Chr(34) & "SOLA" & sJear & "_" & sSOLA & "_HighQuality (HQ)" & Chr(34) & ","
-                OK(2) = True
+            If sFileOutput(iIndex).IndexOf("title =") > -1 Then
+                sFileOutput(iIndex) = vbTab & "title = " & Chr(34) & "SOLA" & Select_Data.Year & "_" & Select_Data.Sola & "_" & sQuality_long & Chr(34) & ","
+                OK_Writeline(1).Name = "title"
+                OK_Writeline(1).Found = True
                 Continue For
             End If
-            If sFileOutput(iIndex).IndexOf("tokenCustomString") > -1 Then
-                sFileOutput(iIndex) = "		tokenCustomString = " & Chr(34) & sKürzel & Chr(34) & ","
-                OK(3) = True
+            If sFileOutput(iIndex).IndexOf("tokenCustomString =") > -1 Then
+                sFileOutput(iIndex) = vbTab & vbTab & "tokenCustomString = " & Chr(34) & Select_Data.Kürzel & Chr(34) & ","
+                OK_Writeline(2).Name = "tokenCustomString"
+                OK_Writeline(2).Found = True
                 Continue For
             End If
-            If sFileOutput(iIndex).IndexOf("tokens") > -1 Then
-                sFileOutput(iIndex) = "tokens = " & Chr(34) & "{{date_YY}} - {{date_MM}} - {{date_DD}}__{{date_Hour}}-{{date_Minute}}-{{date_Second}}__SOLA" & sJear & "_" & sSOLA & "_{{custom_token}}_HQ_{{image_name}}" & Chr(34) & ","
-                OK(4) = True
+            If sFileOutput(iIndex).IndexOf("tokens =") > -1 Then
+                sFileOutput(iIndex) = vbTab & vbTab & "tokens = " & Chr(34) & "{{date_YY}}-{{date_MM}}-{{date_DD}}__{{date_Hour}}-{{date_Minute}}-{{date_Second}}__SOLA" & Select_Data.Year & "_" & Select_Data.Sola & "_{{custom_token}}_" & sQuality_short & "_{{image_name}}" & Chr(34) & ","
+                OK_Writeline(3).Name = "tokens"
+                OK_Writeline(3).Found = True
                 Continue For
             End If
         Next
-        If OK(1) And OK(2) And OK(3) And OK(4) Then
-            System.IO.File.WriteAllLines(My.Resources.Resource1.HighQuality__HQ_Txt, sFileOutput)
+
+        For Each element In OK_Writeline
+            If Not element.Found Then
+                sFehlerBeschreibung = sFehlerBeschreibung & " " & Chr(34) & element.Name & Chr(34) & " Konte nicht gefunden werden" & vbNewLine
+                bFault_Writelines = True
+            End If
+        Next
+
+        If Not bFault_Writelines Then
+            System.IO.File.WriteAllLines(Pfad, sFileOutput)
             Return True
             Exit Function
         Else
-            MsgBox("Anscheinend ist was Schiefgelaufen beim Vorbereiten", vbAbort)
+            MsgBox(sFehlerBeschreibung, vbCritical, "Fehler !")
         End If
         Return False
     End Function
@@ -359,7 +531,8 @@ Diag:
     Dim Pfad
 
     Private Sub TextBoxTFoto1_TextChanged(sender As Object, e As EventArgs) Handles TextBoxTFoto1.Leave, TextBoxTFoto2.Leave, TextBoxTFoto3.Leave, TextBoxTFoto4.Leave, TextBoxTFoto5.Leave, TextBoxTFoto6.Leave, TextBoxTFoto7.Leave, TextBoxTFoto8.Leave, TextBoxTFoto9.Leave, TextBoxTFoto10.Leave, TextBoxTVideo1.Leave, TextBoxTVideo2.Leave, TextBoxTVideo3.Leave, TextBoxTVideo4.Leave, TextBoxTVideo5.Leave, TextBoxTVideo6.Leave, TextBoxTVideo7.Leave, TextBoxTVideo8.Leave, TextBoxTVideo9.Leave, TextBoxTVideo10.Leave, TextBoxKFoto1.Leave, TextBoxKFoto2.Leave, TextBoxKFoto3.Leave, TextBoxKFoto4.Leave, TextBoxKFoto5.Leave, TextBoxKFoto6.Leave, TextBoxKFoto7.Leave, TextBoxKFoto8.Leave, TextBoxKFoto9.Leave, TextBoxKFoto10.Leave, TextBoxKVideo1.Leave, TextBoxKVideo2.Leave, TextBoxKVideo3.Leave, TextBoxKVideo4.Leave, TextBoxKVideo5.Leave, TextBoxKVideo6.Leave, TextBoxKVideo7.Leave, TextBoxKVideo8.Leave, TextBoxKVideo9.Leave, TextBoxKVideo10.Leave
-        If Not ValidateStr(sender.Text) Then
+        Const sPattern As String = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" 'TODO: Aktuell sind keine Zahlen hinter dem Namen erlaubt
+        If Not ValidateStr(sender.Text, sPattern).boolErgebnis Then
             If Not String.IsNullOrEmpty(sender.Text) Then
                 MsgBox("Ungültige Eingabe", MsgBoxStyle.OkOnly)
             End If
@@ -605,14 +778,13 @@ Diag:
         NameNotEmpty = False
 
     End Function
-    Function ValidateStr(Str As String) As Boolean
+    Public Function ValidateStr(iStr As String, Pattern As String) As (boolErgebnis As Boolean, inputString As String)
         ' Dim sPattern As String = "/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/gi" 
-        Dim sPattern As String = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" 'TODO: Aktuell sind keine Zahlen hinter dem Namen erlaubt
         Dim rx As Regex
-        If rx.IsMatch(Str, sPattern, RegexOptions.IgnoreCase Or RegexOptions.Multiline) Then
-            ValidateStr = True
+        If rx.IsMatch(iStr, Pattern, RegexOptions.IgnoreCase Or RegexOptions.Multiline) Then
+            Return (True, iStr)
         Else
-            ValidateStr = False
+            Return (False, "")
         End If
     End Function
     Sub Ordnerstrucktur_Erstellen()

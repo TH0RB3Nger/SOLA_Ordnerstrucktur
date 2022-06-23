@@ -161,11 +161,23 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="LR_Preset_Input.Designer.vb">
+      <DependentUpon>LR_Preset_Input.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LR_Preset_Input.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="Main_Form.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main_Form.Designer.vb">
+      <DependentUpon>Main_Form.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auswahl_Quality.Designer.vb">
+      <DependentUpon>Auswahl_Quality.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auswahl_Quality.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -191,8 +203,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="Auswahl_Quality.resx">
+      <DependentUpon>Auswahl_Quality.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LR_Preset_Input.resx">
+      <DependentUpon>LR_Preset_Input.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main_Form.resx">
+      <DependentUpon>Main_Form.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -241,6 +259,7 @@
   <ItemGroup>
     <Content Include="Sola Wiedenest Logo 2014.ico" />
     <Content Include="Sola_MM_Ordnerstrucktur\SOLA21_Exportvorgaben\Txt\HighQuality %28HQ%29Txt.txt" />
+    <Content Include="ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="Ookii.Dialogs.Wpf">
