@@ -259,7 +259,6 @@
   <ItemGroup>
     <Content Include="Sola Wiedenest Logo 2014.ico" />
     <Content Include="Sola_MM_Ordnerstrucktur\SOLA21_Exportvorgaben\Txt\HighQuality %28HQ%29Txt.txt" />
-    <Content Include="ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="Ookii.Dialogs.Wpf">
