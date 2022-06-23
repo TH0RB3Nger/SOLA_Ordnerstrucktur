@@ -516,7 +516,6 @@ Diag:
         End If
     End Sub
 
-
     Private Sub ButtonStrucktur_Click(sender As Object, e As EventArgs) Handles ButtonStrucktur.Click
         If Not String.IsNullOrEmpty(Pfad) Then
             Ordnerstrucktur_Erstellen()

@@ -1277,7 +1277,7 @@ Partial Class Main_Form
         Me.OpenFileDialog1.AddExtension = False
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Form1
+        'Main_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1290,7 +1290,7 @@ Partial Class Main_Form
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label16)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "Form1"
+        Me.Name = "Main_Form"
         Me.Text = "Sola Wiedenest Multimedia"
         Me.TabControl.ResumeLayout(False)
         Me.Ordnerstrucktur.ResumeLayout(False)
