@@ -201,6 +201,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tools.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Auswahl_Quality.resx">
