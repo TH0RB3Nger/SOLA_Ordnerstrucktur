@@ -7,6 +7,7 @@ Imports System.Resources
 Public Class Main_Form
     'TODO: Speichern und Laden Datumswerte unteschiedlich !!
     'Allgemeine Variablen (Daten)
+    Const Version As String = "Alpha-v0.2.0"
     Dim sSolaJahr As String
     Dim sNameTFoto(9), sNameTVideo(9), sNameKFoto(9), sNameKVideo(9)
     Dim bTFoto, bTVideo, bTShowfiles, bTInstagramm, bTGrafik, bTAudio, bTOrga, bTAllgemein
@@ -19,7 +20,7 @@ Public Class Main_Form
     Dim Pfad
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Me.LinkLabel_Version.Text = Version
     End Sub
 
     Private Sub DataSave_Click(sender As Object, e As EventArgs) Handles DataSave.Click
@@ -421,7 +422,10 @@ Diag:
         Ordnerauswahl_ini()
     End Sub
 
-
+    Private Sub LinkLabel_Version_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel_Version.LinkClicked
+        System.Diagnostics.Process.Start("https://github.com/TH0RB3Nger/SOLA_Ordnerstrucktur/releases")
+        LinkLabel_Version.LinkVisited = True
+    End Sub
 
     Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
         'Link zu dem Sola Wiedenest Instagram Account

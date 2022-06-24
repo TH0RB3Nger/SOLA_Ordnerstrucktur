@@ -134,8 +134,8 @@ Partial Class Main_Form
         Me.Label1 = New System.Windows.Forms.Label()
         Me.CheckBoxTeen = New System.Windows.Forms.CheckBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.OokiiDialog = New Ookii.Dialogs.Wpf.VistaFolderBrowserDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.LinkLabel_Version = New System.Windows.Forms.LinkLabel()
         Me.TabControl.SuspendLayout()
         Me.Ordnerstrucktur.SuspendLayout()
         Me.GroupBoxKids.SuspendLayout()
@@ -1267,11 +1267,22 @@ Partial Class Main_Form
         Me.OpenFileDialog1.AddExtension = False
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'LinkLabel_Version
+        '
+        Me.LinkLabel_Version.AutoSize = True
+        Me.LinkLabel_Version.Location = New System.Drawing.Point(1128, 741)
+        Me.LinkLabel_Version.Name = "LinkLabel_Version"
+        Me.LinkLabel_Version.Size = New System.Drawing.Size(67, 13)
+        Me.LinkLabel_Version.TabIndex = 64
+        Me.LinkLabel_Version.TabStop = True
+        Me.LinkLabel_Version.Text = "Alpha-v0.0.0"
+        '
         'Main_Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1207, 763)
+        Me.Controls.Add(Me.LinkLabel_Version)
         Me.Controls.Add(Me.TabControl)
         Me.Controls.Add(Me.LinkLabel2)
         Me.Controls.Add(Me.Label52)
@@ -1406,5 +1417,5 @@ Partial Class Main_Form
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents OokiiDialog As Ookii.Dialogs.Wpf.VistaFolderBrowserDialog
-
+    Friend WithEvents LinkLabel_Version As LinkLabel
 End Class
