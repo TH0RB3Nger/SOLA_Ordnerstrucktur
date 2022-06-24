@@ -22,6 +22,7 @@ Partial Class LR_Preset_Input
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LR_Preset_Input))
         Me.Button_Teen = New System.Windows.Forms.Button()
         Me.Button_Kids = New System.Windows.Forms.Button()
         Me.Button_Cancel = New System.Windows.Forms.Button()
@@ -101,6 +102,7 @@ Partial Class LR_Preset_Input
         Me.Controls.Add(Me.Button_Cancel)
         Me.Controls.Add(Me.Button_Kids)
         Me.Controls.Add(Me.Button_Teen)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "LR_Preset_Input"
         Me.Text = "Angaben für Lightroom"
         Me.ResumeLayout(False)

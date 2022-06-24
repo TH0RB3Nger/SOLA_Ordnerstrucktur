@@ -31,7 +31,6 @@ Partial Class Main_Form
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.Ordnerstrucktur = New System.Windows.Forms.TabPage()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.LabelPfad = New System.Windows.Forms.Label()
         Me.DataLoad = New System.Windows.Forms.Button()
@@ -135,13 +134,13 @@ Partial Class Main_Form
         Me.Label1 = New System.Windows.Forms.Label()
         Me.CheckBoxTeen = New System.Windows.Forms.CheckBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.OokiiDialog = New Ookii.Dialogs.Wpf.VistaFolderBrowserDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.TabControl.SuspendLayout()
         Me.Ordnerstrucktur.SuspendLayout()
         Me.GroupBoxKids.SuspendLayout()
         Me.GroupBoxTeens.SuspendLayout()
         Me.SuspendLayout()
-        Me.OokiiDialog = New Ookii.Dialogs.Wpf.VistaFolderBrowserDialog
         '
         'Label15
         '
@@ -212,7 +211,6 @@ Partial Class Main_Form
         '
         'Ordnerstrucktur
         '
-        Me.Ordnerstrucktur.Controls.Add(Me.Button2)
         Me.Ordnerstrucktur.Controls.Add(Me.Button1)
         Me.Ordnerstrucktur.Controls.Add(Me.LabelPfad)
         Me.Ordnerstrucktur.Controls.Add(Me.DataLoad)
@@ -228,15 +226,6 @@ Partial Class Main_Form
         Me.Ordnerstrucktur.TabIndex = 0
         Me.Ordnerstrucktur.Text = "Ordnerstrucktur"
         Me.Ordnerstrucktur.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(1015, 641)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 63
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -1417,6 +1406,5 @@ Partial Class Main_Form
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents OokiiDialog As Ookii.Dialogs.Wpf.VistaFolderBrowserDialog
-    Friend WithEvents Button2 As Button
 
 End Class

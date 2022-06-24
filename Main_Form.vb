@@ -94,8 +94,8 @@ Public Class Main_Form
                 Try
                     currentRow = Reader.ReadFields()
                     sSolaJahr = currentRow(0)
-                    bTeens = currentRow(1)
-                    bKids = currentRow(2)
+                    bTeens = CBool(currentRow(1))
+                    bKids = CBool(currentRow(2))
                     For i = 0 To 9
                         sNameTFoto(i) = currentRow(3 + i)
                     Next
@@ -108,24 +108,24 @@ Public Class Main_Form
                     For i = 0 To 9
                         sNameKVideo(i) = currentRow(33 + i)
                     Next
-                    bTFoto = currentRow(43)
-                    bTVideo = currentRow(44)
-                    bTShowfiles = currentRow(45)
-                    bTInstagramm = currentRow(46)
-                    bTGrafik = currentRow(47)
-                    bTAudio = currentRow(48)
-                    bTOrga = currentRow(49)
-                    bTAllgemein = currentRow(50)
-                    bKFoto = currentRow(51)
-                    bKVideo = currentRow(52)
-                    bKShowfiles = currentRow(53)
-                    bKInstagramm = currentRow(54)
-                    bKGrafik = currentRow(55)
-                    bKAudio = currentRow(56)
-                    bKOrga = currentRow(57)
-                    bKAllgemein = currentRow(58)
-                    dTTag(0) = currentRow(59)
-                    dKTag(0) = currentRow(60)
+                    bTFoto = CBool(currentRow(43))
+                    bTVideo = CBool(currentRow(44))
+                    bTShowfiles = CBool(currentRow(45))
+                    bTInstagramm = CBool(currentRow(46))
+                    bTGrafik = CBool(currentRow(47))
+                    bTAudio = CBool(currentRow(48))
+                    bTOrga = CBool(currentRow(49))
+                    bTAllgemein = CBool(currentRow(50))
+                    bKFoto = CBool(currentRow(51))
+                    bKVideo = CBool(currentRow(52))
+                    bKShowfiles = CBool(currentRow(53))
+                    bKInstagramm = CBool(currentRow(54))
+                    bKGrafik = CBool(currentRow(55))
+                    bKAudio = CBool(currentRow(56))
+                    bKOrga = CBool(currentRow(57))
+                    bKAllgemein = CBool(currentRow(58))
+                    dTTag(0) = CDate(currentRow(59))
+                    dKTag(0) = CDate(currentRow(60))
                     'Dim currentField As String
                     'For Each currentField In currentRow
                     'sContent(iField) = currentField

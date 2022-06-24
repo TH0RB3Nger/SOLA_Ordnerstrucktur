@@ -22,6 +22,7 @@ Partial Class Auswahl_Quality
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Auswahl_Quality))
         Me.Textbox_Pfad = New System.Windows.Forms.TextBox()
         Me.Cancel = New System.Windows.Forms.Button()
         Me.Button_RAW = New System.Windows.Forms.Button()
@@ -93,7 +94,7 @@ Partial Class Auswahl_Quality
     "e anhand des Dateinamens am ende des Pfads den Richtigen Type aus."
         Me.MsgText.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'Custom_Msgbox
+        'Auswahl_Quality
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -104,7 +105,8 @@ Partial Class Auswahl_Quality
         Me.Controls.Add(Me.Button_LQ)
         Me.Controls.Add(Me.Button_HQ)
         Me.Controls.Add(Me.MsgText)
-        Me.Name = "Custom_Msgbox"
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Name = "Auswahl_Quality"
         Me.Text = "Help"
         Me.ResumeLayout(False)
         Me.PerformLayout()
