@@ -543,6 +543,7 @@ Diag:
         OokiiDialog.ShowDialog()
         If String.IsNullOrEmpty(OokiiDialog.SelectedPath) Then
             MsgBox("Es wurde kein Ordner ausgewählt!", vbExclamation)
+            Return vbEmpty
             Exit Function
         End If
         Return OokiiDialog.SelectedPath
