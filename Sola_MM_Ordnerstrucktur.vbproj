@@ -7,6 +7,19 @@
     <StartupObject>Sola_MM_Ordnerstrucktur.Form1</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+	  <!-- Code to merge the assemblies into one:setup.exe -->
+	  <UsingTask TaskName="ILMerge.MSBuild.Tasks.ILMerge" AssemblyFile="$(SolutionDir)\packages\ILMerge.MSBuild.Tasks.1.0.0.3\tools\ILMerge.MSBuild.Tasks.dll" />
+	  <Target Name="AfterBuild">
+		  <ItemGroup>
+			  <MergeAsm Include="$(OutputPath)$(TargetFileName)" />
+			  <MergeAsm Include="$(OutputPath)Ookii.Dialogs.Wpf.dll" />
+		  </ItemGroup>
+		  <PropertyGroup>
+			  <MergedAssembly>$(ProjectDir)$(OutDir)MERGED_ASSEMBLY_NAME.exe</MergedAssembly>
+		  </PropertyGroup>
+		  <Message Text="ILMerge @(MergeAsm) -&gt; $(MergedAssembly)" Importance="high" />
+		  <ILMerge InputAssemblies="@(MergeAsm)" OutputFile="$(MergedAssembly)" TargetKind="SameAsPrimaryAssembly" />
+	  </Target>
   </PropertyGroup>
 
   <ItemGroup>
