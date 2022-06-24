@@ -136,6 +136,7 @@ Partial Class Main_Form
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.LinkLabel_Version = New System.Windows.Forms.LinkLabel()
+        Me.OokiiDialog = New Ookii.Dialogs.Wpf.VistaFolderBrowserDialog()
         Me.TabControl.SuspendLayout()
         Me.Ordnerstrucktur.SuspendLayout()
         Me.GroupBoxKids.SuspendLayout()
