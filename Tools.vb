@@ -9,7 +9,7 @@ Public Class Tools
             bSolaJahrMan = value
         End Set
     End Property
-
+'Teständerung
     Function SolaJahr(bTeens As Boolean, bkids As Boolean) As String
         Dim sJahr As String
         If bTeens And Not bkids Then
