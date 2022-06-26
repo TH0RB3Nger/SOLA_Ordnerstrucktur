@@ -7,7 +7,7 @@ Imports System.Resources
 Public Class Main_Form
     'TODO: Speichern und Laden Datumswerte unteschiedlich !!
     'Allgemeine Variablen (Daten)
-    Const Version As String = "Alpha-v0.2.0"
+    Const Version As String = "Alpha-v0.2.1"
     Const sDateFormat As String = "dd-MM-yyyy"
     Dim sSolaJahr As String
     Dim sNameTFoto(9), sNameTVideo(9), sNameKFoto(9), sNameKVideo(9)
