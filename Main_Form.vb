@@ -8,6 +8,7 @@ Public Class Main_Form
     'TODO: Speichern und Laden Datumswerte unteschiedlich !!
     'Allgemeine Variablen (Daten)
     Const Version As String = "Alpha-v0.2.0"
+    Const sDateFormat As String = "dd-MM-yyyy"
     Dim sSolaJahr As String
     Dim sNameTFoto(9), sNameTVideo(9), sNameKFoto(9), sNameKVideo(9)
     Dim bTFoto, bTVideo, bTShowfiles, bTInstagramm, bTGrafik, bTAudio, bTOrga, bTAllgemein
@@ -21,6 +22,24 @@ Public Class Main_Form
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.LinkLabel_Version.Text = Version
+        Dim dMinDate As DateTime = DateAdd(DateInterval.DayOfYear, CDbl(DateDiff(DateInterval.Day, Now(), CDate(CStr(Year(Now()) & "/" & Month(Now()) - 1 & "/" & 1)))), Now())
+        Dim dMaxDate As DateTime = DateAdd(DateInterval.Year, 5, Now())
+        With Me.DateTimePickerTeen
+            .Format = DateTimePickerFormat.Custom
+            .CustomFormat = sDateFormat
+            .MinDate = dMinDate
+            .MaxDate = dMaxDate
+            .Checked = False
+
+        End With
+        With Me.DateTimePickerKids
+            .Format = DateTimePickerFormat.Custom
+            .CustomFormat = sDateFormat
+            .MinDate = dMinDate
+            .MaxDate = dMaxDate
+            .Checked = False
+        End With
+
     End Sub
 
     Private Sub DataSave_Click(sender As Object, e As EventArgs) Handles DataSave.Click
@@ -344,19 +363,19 @@ Diag:
     Sub Berechne_Woche(startDate As Date, Teen As Boolean) 'TODO Umbauen damit es als Funktion in die Tools Klasse past
         Dim dTag As Date
         If Teen Then
-            dTTag(0) = Format(startDate, "yy-MM-dd")
+            dTTag(0) = Format(startDate, sDateFormat)  '"yy-MM-dd"
             sTTag(0) = CStr(dTTag(0))
             For i = 1 To 7
                 dTag = DateAdd("d", i, startDate)
-                dTTag(i) = Format(dTag, "yy-MM-dd")
+                dTTag(i) = Format(dTag, sDateFormat)
                 sTTag(i) = CStr(dTTag(i))
             Next
         Else
-            dKTag(0) = Format(startDate, "yy-MM-dd")
+            dKTag(0) = Format(startDate, sDateFormat)
             sKTag(0) = CStr(dKTag(0))
             For i = 1 To 7
                 dTag = DateAdd("d", i, startDate)
-                dKTag(i) = Format(dTag, "yy-MM-dd")
+                dKTag(i) = Format(dTag, sDateFormat)
                 sKTag(i) = CStr(dKTag(i))
             Next
         End If
@@ -635,9 +654,9 @@ Diag:
                         sPfad = sPfad & FDL & sString1
 
                         For Tag = 1 To 8
-                            MkDir(sPfad & FDL & sTTag(Tag - 1) & "_Tag" & Tag)
+                            MkDir(sPfad & FDL & sTTag(Tag - 1) & "_Tag_" & Tag)
                             iOrdner = iOrdner + 1
-                            sPfad = sPfad & FDL & sTTag(Tag - 1) & "_Tag" & Tag
+                            sPfad = sPfad & FDL & sTTag(Tag - 1) & "_Tag_" & Tag
                             MkDir(sPfad & FDL & "01_Bilder des Tages" & Tag & "_HQ")
                             iOrdner = iOrdner + 1
                             MkDir(sPfad & FDL & "02_Bilder des Tages" & Tag & "_LQ")
@@ -664,7 +683,7 @@ Diag:
                                         iOrdner = iOrdner + 1
                                     Next
                                     'sPfad = sPfad & FDL & sTTag(Tag - 1) & "_Tag" & Tag
-                                    sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "01_Teens" & FDL & sString1 & FDL & sTTag(Tag - 1) & "_Tag" & Tag
+                                    sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "01_Teens" & FDL & sString1 & FDL & sTTag(Tag - 1) & "_Tag_" & Tag
                                 End If
                             Next
                             sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "01_Teens" & FDL & sString1
@@ -695,9 +714,9 @@ Diag:
 
 
                         For Tag = 1 To 8
-                            MkDir(sPfad & FDL & sTTag(Tag - 1) & "_Tag" & Tag)
+                            MkDir(sPfad & FDL & sTTag(Tag - 1) & "_Tag_" & Tag)
                             iOrdner = iOrdner + 1
-                            sPfad = sPfad & FDL & sTTag(Tag - 1) & "_Tag" & Tag
+                            sPfad = sPfad & FDL & sTTag(Tag - 1) & "_Tag_" & Tag
                             MkDir(sPfad & FDL & "01_Rohvideos")
                             iOrdner = iOrdner + 1
                             MkDir(sPfad & FDL & "02_Projektdatein")
@@ -729,7 +748,7 @@ Diag:
                         iOrdner = iOrdner + 1
                         sPfad = sPfad & FDL & sString1
                         For Tag = 1 To 8
-                            MkDir(sPfad & FDL & sTTag(Tag - 1) & "_Tag" & Tag)
+                            MkDir(sPfad & FDL & sTTag(Tag - 1) & "_Tag_" & Tag)
                             iOrdner = iOrdner + 1
                         Next
                         'sPfad = sPfad & FDL & "01_Teens"
@@ -753,7 +772,7 @@ Diag:
                         iOrdner = iOrdner + 1
                         sPfad = sPfad & FDL & sString1
                         For Tag = 1 To 8
-                            MkDir(sPfad & FDL & sTTag(Tag - 1) & "_Tag" & Tag)
+                            MkDir(sPfad & FDL & sTTag(Tag - 1) & "_Tag_" & Tag)
                             iOrdner = iOrdner + 1
                         Next
                         'sPfad = sPfad & FDL & "01_Teens"
@@ -801,9 +820,9 @@ Diag:
                         sPfad = sPfad & FDL & sString1
 
                         For Tag = 1 To 8
-                            MkDir(sPfad & FDL & dKTag(Tag - 1) & "_Tag" & Tag)
+                            MkDir(sPfad & FDL & dKTag(Tag - 1) & "_Tag_" & Tag)
                             iOrdner = iOrdner + 1
-                            sPfad = sPfad & FDL & dKTag(Tag - 1) & "_Tag" & Tag
+                            sPfad = sPfad & FDL & dKTag(Tag - 1) & "_Tag_" & Tag
                             MkDir(sPfad & FDL & "01_Bilder des Tages" & Tag & "_HQ")
                             iOrdner = iOrdner + 1
                             MkDir(sPfad & FDL & "02_Bilder des Tages" & Tag & "_LQ")
@@ -830,7 +849,7 @@ Diag:
                                         iOrdner = iOrdner + 1
                                     Next
                                     'sPfad = sPfad & FDL & sTTag(Tag - 1) & "_Tag" & Tag
-                                    sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "02_Kids" & FDL & sString1 & FDL & sKTag(Tag - 1) & "_Tag" & Tag
+                                    sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "02_Kids" & FDL & sString1 & FDL & sKTag(Tag - 1) & "_Tag_" & Tag
                                 End If
                             Next
                             sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "02_Kids" & FDL & sString1
@@ -861,9 +880,9 @@ Diag:
 
 
                         For Tag = 1 To 8
-                            MkDir(sPfad & FDL & sKTag(Tag - 1) & "_Tag" & Tag)
+                            MkDir(sPfad & FDL & sKTag(Tag - 1) & "_Tag_" & Tag)
                             iOrdner = iOrdner + 1
-                            sPfad = sPfad & FDL & sKTag(Tag - 1) & "_Tag" & Tag
+                            sPfad = sPfad & FDL & sKTag(Tag - 1) & "_Tag_" & Tag
                             MkDir(sPfad & FDL & "01_Rohvideos")
                             iOrdner = iOrdner + 1
                             MkDir(sPfad & FDL & "02_Projektdatein")
@@ -895,7 +914,7 @@ Diag:
                         iOrdner = iOrdner + 1
                         sPfad = sPfad & FDL & sString1
                         For Tag = 1 To 8
-                            MkDir(sPfad & FDL & sKTag(Tag - 1) & "_Tag" & Tag)
+                            MkDir(sPfad & FDL & sKTag(Tag - 1) & "_Tag_" & Tag)
                             iOrdner = iOrdner + 1
                         Next
                         'sPfad = sPfad & FDL & "01_Teens"
@@ -919,7 +938,7 @@ Diag:
                         iOrdner = iOrdner + 1
                         sPfad = sPfad & FDL & sString1
                         For Tag = 1 To 8
-                            MkDir(sPfad & FDL & sKTag(Tag - 1) & "_Tag" & Tag)
+                            MkDir(sPfad & FDL & sKTag(Tag - 1) & "_Tag_" & Tag)
                             iOrdner = iOrdner + 1
                         Next
                         'sPfad = sPfad & FDL & "01_Teens"
