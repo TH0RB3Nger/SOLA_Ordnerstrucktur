@@ -184,7 +184,7 @@ Public Class Tools
         End If
         If x = "K" Then     'auswahl K
             For i = 1 To 10     'Alle Eingabe Felder Prüfen
-                text = Main_Form.GroupBoxTeens.Controls("TextBox" & x & s & i).text
+                text = Main_Form.GroupBoxKids.Controls("TextBox" & x & s & i).text
                 If String.IsNullOrWhiteSpace(text) And String.IsNullOrEmpty(text) Then  'Prüfen auf Inhalt
                     Return True
                     Exit Function
