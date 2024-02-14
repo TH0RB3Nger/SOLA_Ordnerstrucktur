@@ -4,7 +4,7 @@ Imports System.Resources
 'Made By Thorben Renfordt
 Public Class Main_Form
     'Allgemeine Variablen (Daten)
-    Const Version As String = "Alpha-v0.2.2"                                                    'Version
+    Const Version As String = "Alpha-v0.2.1"                                                    'Version
     Const sDateFormat As String = "dd-MM-yyyy"                                                  'Formatierung vom Datum
     Dim sSolaJahr As String                                                                     'Jahr in dem das Sola Stattfindet
     Dim sNameTFoto(9), sNameTVideo(9), sNameKFoto(9), sNameKVideo(9)                            'Namen der Mittarbeiter im Stringarray
