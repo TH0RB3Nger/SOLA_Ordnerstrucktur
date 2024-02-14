@@ -686,9 +686,9 @@ Diag:       'Diagnose welche Daten fehlen bzw. nicht angepasst sind
                         sPfad = sPfad & FDL & sString1
 
                         For Tag = 1 To 8                                                'Tag 1 bis 8
-                            MkDir(sPfad & FDL & sTTag(Tag - 1) & "_Tag_" & Tag)         'Erstellt den Tagesordner (dd-mm-yyyy_Tag_X)
+                            MkDir(sPfad & FDL & "_Tag_" & Tag & "_" & sTTag(Tag - 1))         'Erstellt den Tagesordner (dd-mm-yyyy_Tag_X)
                             iOrdner = iOrdner + 1
-                            sPfad = sPfad & FDL & sTTag(Tag - 1) & "_Tag_" & Tag
+                            sPfad = sPfad & FDL & "_Tag_" & Tag & "_" & sTTag(Tag - 1)
                             MkDir(sPfad & FDL & "01_Bilder_des_Tages_" & Tag & "_HQ")    'Erstellt den Ordner "01_Bilder_des_Tages_X_HQ"
                             iOrdner = iOrdner + 1
                             MkDir(sPfad & FDL & "02_Bilder_des_Tages_" & Tag & "_LQ")   'Erstellt den Ordner "02_Bilder_des_Tages_X_LQ"
@@ -715,7 +715,7 @@ Diag:       'Diagnose welche Daten fehlen bzw. nicht angepasst sind
                                         iOrdner = iOrdner + 1
                                     Next
                                     'sPfad = sPfad & FDL & sTTag(Tag - 1) & "_Tag" & Tag
-                                    sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "01_Teens" & FDL & sString1 & FDL & sTTag(Tag - 1) & "_Tag_" & Tag
+                                    sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "01_Teens" & FDL & sString1 & FDL & "_Tag_" & Tag & "_" & sTTag(Tag - 1)
                                 End If
                             Next
                             sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "01_Teens" & FDL & sString1
@@ -746,9 +746,9 @@ Diag:       'Diagnose welche Daten fehlen bzw. nicht angepasst sind
 
 
                         For Tag = 1 To 8                                    'Tages Ordner Erstellen Tag 1 bis 8
-                            MkDir(sPfad & FDL & sTTag(Tag - 1) & "_Tag_" & Tag)
+                            MkDir(sPfad & FDL & "_Tag_" & Tag & "_" & sTTag(Tag - 1))
                             iOrdner = iOrdner + 1
-                            sPfad = sPfad & FDL & sTTag(Tag - 1) & "_Tag_" & Tag
+                            sPfad = sPfad & FDL & "_Tag_" & Tag & "_" & sTTag(Tag - 1)
                             MkDir(sPfad & FDL & "01_Rohvideos")             'Ordner "01_Rohvideos" erstellen
                             iOrdner = iOrdner + 1
                             MkDir(sPfad & FDL & "02_Projektdatein")         'Ordner "02_Projektdatein" erstellen
@@ -787,8 +787,8 @@ Diag:       'Diagnose welche Daten fehlen bzw. nicht angepasst sind
                         Tdone(2) = True
                  'Instagramm Ordner ausgewählt und nicht erledigt
                     Case bTInstagramm And Not Tdone(3)
-                        sString1 = sString1 & "_Instagramm"
-                        MkDir(sPfad & FDL & sString1)                       'Ordner Instergramm erstellen
+                        sString1 = sString1 & "_Instagram"
+                        MkDir(sPfad & FDL & sString1)                       'Ordner Instergram erstellen
                         iOrdner = iOrdner + 1
                         Tdone(3) = True
                  'Grafik Ordner ausgewählt und nicht erledigt  
@@ -804,7 +804,7 @@ Diag:       'Diagnose welche Daten fehlen bzw. nicht angepasst sind
                         iOrdner = iOrdner + 1
                         sPfad = sPfad & FDL & sString1
                         For Tag = 1 To 8                                    'Tagesordner 1 bis 8 erstellen
-                            MkDir(sPfad & FDL & sTTag(Tag - 1) & "_Tag_" & Tag)
+                            MkDir(sPfad & FDL & "_Tag_" & Tag & sTTag(Tag - 1))
                             iOrdner = iOrdner + 1
                         Next
                         'sPfad = sPfad & FDL & "01_Teens"
@@ -853,9 +853,9 @@ Diag:       'Diagnose welche Daten fehlen bzw. nicht angepasst sind
                         sPfad = sPfad & FDL & sString1
 
                         For Tag = 1 To 8                                    'Tag 1 bis 8
-                            MkDir(sPfad & FDL & dKTag(Tag - 1) & "_Tag_" & Tag)                       'Erstellt den Tagesordner (dd-mm-yyyy_Tag_X)
+                            MkDir(sPfad & FDL & "Tag_" & Tag & "_" & dKTag(Tag - 1))                       'Erstellt den Tagesordner (dd-mm-yyyy_Tag_X)
                             iOrdner = iOrdner + 1
-                            sPfad = sPfad & FDL & dKTag(Tag - 1) & "_Tag_" & Tag
+                            sPfad = sPfad & FDL & "Tag_" & Tag & "_" & dKTag(Tag - 1)
                             MkDir(sPfad & FDL & "01_Bilder_des_Tages_" & Tag & "_HQ")                       'Ordner "01_Bilder_des_Tages_XX_HQ" erstellen
                             iOrdner = iOrdner + 1
                             MkDir(sPfad & FDL & "02_Bilder_des_Tages_" & Tag & "_LQ")                       'Ordner "02_Bilder_des_Tages_XX_LQ" erstellen
@@ -881,7 +881,7 @@ Diag:       'Diagnose welche Daten fehlen bzw. nicht angepasst sind
                                         iOrdner = iOrdner + 1
                                     Next
                                     'sPfad = sPfad & FDL & sTTag(Tag - 1) & "_Tag" & Tag
-                                    sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "02_Kids" & FDL & sString1 & FDL & sKTag(Tag - 1) & "_Tag_" & Tag
+                                    sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "02_Kids" & FDL & sString1 & FDL & "_Tag_" & Tag & sKTag(Tag - 1)
                                 End If
                             Next
                             sPfad = Pfad & FDL & "Sola_" & sSolaJahr & FDL & "02_Kids" & FDL & sString1
@@ -911,9 +911,9 @@ Diag:       'Diagnose welche Daten fehlen bzw. nicht angepasst sind
 
 
                         For Tag = 1 To 8                                    'Tagesordner 1 bis 8 
-                            MkDir(sPfad & FDL & sKTag(Tag - 1) & "_Tag_" & Tag)                       'Ordner Tagesordner erstellen
+                            MkDir(sPfad & FDL & "Tag_" & Tag & "_" & dKTag(Tag - 1))                       'Ordner Tagesordner erstellen
                             iOrdner = iOrdner + 1
-                            sPfad = sPfad & FDL & sKTag(Tag - 1) & "_Tag_" & Tag
+                            sPfad = sPfad & FDL & "Tag_" & Tag & "_" & dKTag(Tag - 1)
                             MkDir(sPfad & FDL & "01_Rohvideos")                       'Ordner 01_Rohvideos erstellen
                             iOrdner = iOrdner + 1
                             MkDir(sPfad & FDL & "02_Projektdatein")                       'Ordner 02_Projektdatein erstellen
@@ -945,14 +945,14 @@ Diag:       'Diagnose welche Daten fehlen bzw. nicht angepasst sind
                         iOrdner = iOrdner + 1
                         sPfad = sPfad & FDL & sString1
                         For Tag = 1 To 8                       'Tagesordner 1 bis 8 erstellen
-                            MkDir(sPfad & FDL & sKTag(Tag - 1) & "_Tag_" & Tag)
+                            MkDir(sPfad & FDL & "Tag_" & Tag & "_" & dKTag(Tag - 1))
                             iOrdner = iOrdner + 1
                         Next
                         'sPfad = sPfad & FDL & "01_Teens"
                         Kdone(2) = True
                  'Instagramm Ordner angewählt und nicht erledigt
                     Case bKInstagramm And Not Kdone(3)
-                        sString1 = sString1 & "_Instagramm"
+                        sString1 = sString1 & "_Instagram"
                         MkDir(sPfad & FDL & sString1)                       'Ordner Instagramm erstellen
                         iOrdner = iOrdner + 1
                         Kdone(3) = True
@@ -969,7 +969,7 @@ Diag:       'Diagnose welche Daten fehlen bzw. nicht angepasst sind
                         iOrdner = iOrdner + 1
                         sPfad = sPfad & FDL & sString1
                         For Tag = 1 To 8                       'Tagesordner 1 bis 8 erstellen
-                            MkDir(sPfad & FDL & sKTag(Tag - 1) & "_Tag_" & Tag)
+                            MkDir(sPfad & FDL & "Tag_" & Tag & "_" & dKTag(Tag - 1))
                             iOrdner = iOrdner + 1
                         Next
                         'sPfad = sPfad & FDL & "01_Teens"
