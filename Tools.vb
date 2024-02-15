@@ -11,7 +11,7 @@ Public Class Tools
     End Property
     'Sola Jahr automatisch zurückgeben
     Function SolaJahr(bTeens As Boolean, bkids As Boolean) As String
-        Dim sJahr As String
+        Dim sJahr As String = ""
         If bTeens And Not bkids Then    'anwahl Teensola
             sJahr = CStr(Year(Main_Form.DateTimePickerTeen.Value))  'auslesen des Startdatums Teen vom Form
 
@@ -40,7 +40,7 @@ Public Class Tools
     'auswertung des Rückgabewerts des LR_Preset_input Forms
     Function Select_Data_Preset() As (Valid As Integer, Year As String, Sola As String, Kürzel As String)
 
-        Dim sJear As String
+        Dim sJear As String = ""
         Dim Dialog_Data_input As New LR_Preset_Input
         Dim sSola As String = ""
         Dim iValid As Integer = 0
@@ -171,6 +171,7 @@ Public Class Tools
         ElseIf y = "V" Then
             s = "Video"
         Else
+            Return False
             Exit Function
         End If
         If x = "T" Then     'auswahl T

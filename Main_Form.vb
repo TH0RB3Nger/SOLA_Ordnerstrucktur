@@ -46,7 +46,7 @@ Public Class Main_Form
     'Speichern der Konfiguration (csv Datei) in einem ausgewälten Pfad
     Private Sub DataSave_Click(sender As Object, e As EventArgs) Handles DataSave.Click
         Delete_Gaps_in_Name()                   'Lere einträge der namen aufrücken
-        Dim sf As SaveFileDialog = New SaveFileDialog()
+        Dim sf As New SaveFileDialog()
         Dim sPfad, sContent, sKopf
         'Dialog Speichern unter konfigurieren
         With sf
@@ -107,7 +107,7 @@ Public Class Main_Form
     'Laden einer Gespeicherten Konfiguration
     Private Sub DataLoad_Click(sender As Object, e As EventArgs) Handles DataLoad.Click
 
-        Dim fd As OpenFileDialog = New OpenFileDialog()
+        Dim fd As New OpenFileDialog()
         Dim strFileName As String
         Dim iField As Integer = 0
         'Konfigurieren des Datei Öffnen Dialogs
@@ -224,8 +224,8 @@ Public Class Main_Form
         Const maxRetry As Integer = 3                                                       'Anzahl versuche
         Dim Select_Data_Valid As (IsValid As Integer, NotValid As Integer, cancel As Integer) = (1, 0, 5)
         Dim iRetry As Integer = 0
-        Dim Select_Data As (Valid As Integer, Year As String, Sola As String, Kürzel As String) = (False, "", "", "")
-        Dim i As Integer = 0
+        Dim Select_Data As (Valid As Integer, Year As String, Sola As String, Kürzel As String)
+        Dim i As Integer
 Retry:
         Dim bOK_create As Boolean
         Dim bOK_change As Boolean
