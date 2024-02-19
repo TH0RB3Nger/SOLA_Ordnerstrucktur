@@ -1,6 +1,6 @@
-# SOLA_Ordnerstrucktur
-Programm zum erstellen der benötigten Ordnerstrucktur für das Sola Multimedia Team
+# SOLA_Ordnerstruktur
+Programm zum erstellen der benötigten Ordnerstruktur für das Sola Multimedia Team
 
-Die Kompelirten datei für Windows findet ihr unter Realeas.
+Die Kompelirten Datei für Windows findet ihr unter Reales.
 
-Bitte nutzt die möglichkeit auf GitHub Fehler zu melden und Diskusionen über neue Funktionen ect. zu erstellen. (Feedback ist wichtig!)
+Bitte nutzt die möglichkeit auf GitHub Fehler zu melden und Diskussionen über neue Funktionen ect. zu erstellen. (Feedback ist wichtig!)
